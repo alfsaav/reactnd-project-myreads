@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 import Landing from './Landing';
 import Search from './Search';
 
@@ -13,27 +14,45 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
 
+     myBooks: []
+
   }
 
-  
-    //Get list of Cats .. source of truth lives in App
-    //pass list_cats to Landing as props
-    //In Landing loop through arrays
-    //Add Callback hook in Search on.... Callback lives in Book, this is inherit to book
- 
+  componentDidMount() {
+
+    this.refreshBooks();
+
+  }
+
+  refreshBooks(){
+    
+    BooksAPI.getAll().then((myBooks) => {
+      this.setState({ myBooks })
+    })
+  }
+
+  doOnShelfUpdate = () => {
+    
+   this.refreshBooks();
+  }
+
   render() {
-   return (
+   
+
+    return (
       <div className="app">
 
              <Route exact path='/' render={() => (
                 <Landing
-                
+                      books={this.state.myBooks}
+                      onShelfUpdate={this.doOnShelfUpdate}
                 />
               )}/>
 
               <Route path='/Search' render={() => (
                 <Search
-               
+                      books={this.state.myBooks}
+                      onShelfUpdate={this.doOnShelfUpdate}               
                 />
               )}/>
 

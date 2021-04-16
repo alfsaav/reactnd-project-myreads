@@ -7,14 +7,15 @@ export default class BookGrid extends Component {
 
 
     static propTypes = {
-      books: PropTypes.object.isRequired,
+      books: PropTypes.array.isRequired,
       shelf: PropTypes.string,
-      handleShelfUpdate: PropTypes.func.isRequired
+      handleShelfUpdate: PropTypes.func,
+      myBooks: PropTypes.array,
     }
 
     render(){
         
-        const {books, shelf} = this.props;
+        const {books, shelf, myBooks, handleShelfUpdate} = this.props;
 
 
         let showingBooks;
@@ -39,7 +40,8 @@ export default class BookGrid extends Component {
                         <li key={book.id}>
                             <Book
                                  book={book}
-                                 handleUpdate = { this.props.handleShelfUpdate}
+                                 handleUpdate = {handleShelfUpdate}
+                                 myBooks={myBooks}
                             />
                         </li>
                     

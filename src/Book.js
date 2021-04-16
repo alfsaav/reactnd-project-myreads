@@ -8,7 +8,9 @@ export default class Book extends Component {
 
     static propTypes = {
         book: PropTypes.object.isRequired,
-        handleUpdate: PropTypes.func.isRequired
+        handleUpdate: PropTypes.func,
+        myBooks: PropTypes.array,
+
       }
 
 
@@ -52,12 +54,25 @@ export default class Book extends Component {
 
     render(){
 
-        
-        const {book} = this.props;
+        //const thisBook = this.props.book;
+        const {book:thisBook, myBooks} = this.props;
+
+        let bookInLib;
+
+        if(myBooks){
+
+                //Check if this book already exists in local library
+                bookInLib = myBooks.find( book => book.title === thisBook.title);
+        }
+
+        let book;
+        if(bookInLib){
+            book = bookInLib;
+        }else{
+            book = thisBook;
+        }
 
         let defaultVal;
-
-        console.log(book.shelf);
 
         if(book.shelf === 'currentlyReading' || book.shelf === 'wantToRead' ||  book.shelf === 'read' ){
             defaultVal = book.shelf

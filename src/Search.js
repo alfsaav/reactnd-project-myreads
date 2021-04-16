@@ -16,7 +16,7 @@ class Search extends Component {
       }
 
       my_timer = null
-
+      debounce_dur = 1000
   
       useSearch = (query) => {
 
@@ -43,6 +43,8 @@ class Search extends Component {
                   BooksAPI.search(query).then(newBooks => {
                           
                         if(newBooks.hasOwnProperty('error')){
+                          
+                          //Empty books state
                           this.setState({newBooks: []});
                           console.log(newBooks.error);
                         }else{
@@ -54,11 +56,12 @@ class Search extends Component {
                       
                         }, error => {
                           
+                          //Empty books state
                           this.setState({newBooks: []});
                         });
                   
 
-            }.bind(this), 1000); 
+            }.bind(this), this.debounce_dur); 
 
         }     
                 
@@ -70,6 +73,8 @@ class Search extends Component {
       render(){
 
         const { newBooks } = this.state;
+
+        const {books:myBooks, onShelfUpdate} = this.props;
         
         return(
         <div className="search-books">
@@ -104,6 +109,8 @@ class Search extends Component {
                   { newBooks && 
                   <BookGrid 
                         books={newBooks}
+                        myBooks= {myBooks}
+                        handleShelfUpdate = {onShelfUpdate}
                   />
                   }
             </div>

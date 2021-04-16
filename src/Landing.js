@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
 import BookGrid from './BookGrid';
 
 class Landing extends Component {
@@ -9,18 +8,18 @@ class Landing extends Component {
         books :[]
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    this.refreshBooks();
+  //   this.refreshBooks();
 
-  }
+  // }
 
-  refreshBooks(){
+  // refreshBooks(){
     
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-    })
-  }
+  //   BooksAPI.getAll().then((books) => {
+  //     this.setState({ books })
+  //   })
+  // }
 
   onShelfUpdate = () => {
     
@@ -33,7 +32,7 @@ class Landing extends Component {
   render() {
 
 
-        const {books} = this.state;
+        const {books,onShelfUpdate} = this.props;
 
         return (
             <div className="list-books">
@@ -48,7 +47,7 @@ class Landing extends Component {
                     <BookGrid 
                         books={books}
                         shelf="currentlyReading"
-                        handleShelfUpdate = {this.onShelfUpdate}
+                        handleShelfUpdate = {onShelfUpdate}
                         />
                   </div>
                 </div>
@@ -58,7 +57,7 @@ class Landing extends Component {
                   <BookGrid 
                         books={books}
                         shelf="wantToRead"
-                        handleShelfUpdate = {this.onShelfUpdate}
+                        handleShelfUpdate = {onShelfUpdate}
                         />
                   </div>
                 </div>
@@ -68,7 +67,7 @@ class Landing extends Component {
                   <BookGrid 
                         books={books}
                         shelf="read"
-                        handleShelfUpdate = {this.onShelfUpdate}
+                        handleShelfUpdate = {onShelfUpdate}
                         />
                   </div>
                 </div>
