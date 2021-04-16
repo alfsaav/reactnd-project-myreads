@@ -1,6 +1,6 @@
-# MyReads Project
+# Alfredo Saavedra - MyReads Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+Completed project adding ReactJS to handle interactivity and modularity. 
 
 Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
 
@@ -22,9 +22,13 @@ To get started developing right away:
 │   └── index.html # DO NOT MODIFY
 └── src
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app. Contains static HTML right now.
+    ├── App.js # This is the root of your app. This component makes the first API request to load books in our shelves, then it shares it's state to its children components
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    ├── Book.js # This is the book component, it renders the book html (book cover, title, etc). It also checks against our current book library, to see if pull data locally or default to the data coming from an API request. 
+    ├── BookGrid.js # This component displays Book Components, it receives a books array, and a handler reference to deal with Book updates.
+    ├── Landing.js # This is a page component that displays 3 different book shelves.
+    ├── Search.js # This is a page component that handles search using a debounce and let's add books to our shelves.
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
     │   ├── arrow-back.svg
