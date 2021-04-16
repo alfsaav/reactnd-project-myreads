@@ -54,15 +54,14 @@ export default class Book extends Component {
 
     render(){
 
-        //const thisBook = this.props.book;
         const {book:thisBook, myBooks} = this.props;
 
         let bookInLib;
 
         if(myBooks){
 
-                //Check if this book already exists in local library
-                bookInLib = myBooks.find( book => book.title === thisBook.title);
+            //Check if this book already exists in local library
+            bookInLib = myBooks.find( book => book.title === thisBook.title);
         }
 
         let book;

@@ -17,18 +17,15 @@ export default class BookGrid extends Component {
         
         const {books, shelf, myBooks, handleShelfUpdate} = this.props;
 
-
+        //I've used escape-string-regexp and approach from ContactsList application from previous examples
         let showingBooks;
         if (shelf) {
-          const match = new RegExp(escapeRegExp(shelf), '')
+          const match = new RegExp(escapeRegExp(shelf), '') 
           showingBooks = books.filter((book) => match.test(book.shelf))
         } else {
           showingBooks = books
         }
-
-     
-
-
+        
         return (
             <ol className="books-grid">
 

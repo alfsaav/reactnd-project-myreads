@@ -3,18 +3,15 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import BookGrid from './BookGrid'
 
-
-//var my_timer = null;
-
 class Search extends Component { 
      
 
       state = {
         query:'',
-        newBooks: [],
-        timer: null,
+        newBooks: [], //Holds array of Search Results
       }
 
+      //Debounce variables
       my_timer = null
       debounce_dur = 1000
   
@@ -30,14 +27,14 @@ class Search extends Component {
 
       componentDidUpdate(_prevProps, prevState){
             
-
+        //I moved the variable outside the scope of this function so it's indepdendent from the reload
         clearTimeout(this.my_timer);
 
         const {query} = this.state;
 
-
+        
         if( query !== prevState.query && query !== ''){
-            
+          
           this.my_timer = setTimeout(function(){
             
                   BooksAPI.search(query).then(newBooks => {
@@ -48,10 +45,9 @@ class Search extends Component {
                           this.setState({newBooks: []});
                           console.log(newBooks.error);
                         }else{
-                           // update Books state
+                          // Update Books state
                           this.setState({newBooks});
-                        };
-                        
+                        };                        
                        
                       
                         }, error => {
@@ -63,10 +59,7 @@ class Search extends Component {
 
             }.bind(this), this.debounce_dur); 
 
-        }     
-                
-          
-                
+        }       
           
       }
   
@@ -79,7 +72,7 @@ class Search extends Component {
         return(
         <div className="search-books">
             <div className="search-books-bar">
-              {/* <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button> */}
+             
               <Link 
                 to="/"
                 className="close-search"
@@ -99,8 +92,7 @@ class Search extends Component {
                   type="text" 
                   placeholder="Search by title or author"
                   onChange={(event)=> this.useSearch(event.target.value)}
-                 // value={query}  
-                  />
+                />
 
               </div>
             </div>

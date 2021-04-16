@@ -8,19 +8,6 @@ class Landing extends Component {
         books :[]
   }
 
-  // componentDidMount() {
-
-  //   this.refreshBooks();
-
-  // }
-
-  // refreshBooks(){
-    
-  //   BooksAPI.getAll().then((books) => {
-  //     this.setState({ books })
-  //   })
-  // }
-
   onShelfUpdate = () => {
     
     console.log('udpated!!');
