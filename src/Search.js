@@ -33,9 +33,18 @@ class Search extends Component {
         const {query} = this.state;
 
         
-        if( query !== prevState.query && query !== ''){
+        if( query !== prevState.query ){
           
           this.my_timer = setTimeout(function(){
+
+
+                    if( query === ''){
+
+                      this.setState({newBooks: []});
+
+                      return false;
+                      
+                    }
             
                   BooksAPI.search(query).then(newBooks => {
                           
@@ -59,8 +68,8 @@ class Search extends Component {
 
             }.bind(this), this.debounce_dur); 
 
-        }       
-          
+        }
+   
       }
   
       render(){
